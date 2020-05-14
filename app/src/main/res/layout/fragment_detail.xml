@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="player"
+            type="com.hellodiffa.coroutinesxroom.data.model.Player" />
+
+        <variable
+            name="image"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detailsToolbar"
+            android:background="@color/ic_launcher_background">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailsToolbar">
+
+                <ImageView
+                    android:id="@+id/playerImage"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/player_image_background"
+                    app:image="@{image}"
+                    app:layout_constraintBottom_toTopOf="@+id/textViewPlayerDescription"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textViewPlayerName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:textColor="@android:color/white"
+                    android:text="@{player.firstName + ` ` + player.lastName}"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    app:layout_constraintLeft_toRightOf="@+id/playerImage"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/playerImage" />
+
+                <TextView
+                    android:id="@+id/textViewPlayerCountry"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="@{player.country}"
+                    android:textColor="@android:color/white"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    app:layout_constraintLeft_toRightOf="@+id/playerImage"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewPlayerName" />
+
+                <TextView
+                    android:id="@+id/textViewPlayerAgeGender"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textColor="@android:color/white"
+                    android:text="@{Integer.toString(player.age)  + ` age ` + ` ( ` +player.gender + ` )`}"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    app:layout_constraintLeft_toRightOf="@+id/playerImage"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewPlayerCountry" />
+
+                <TextView
+                    android:id="@+id/textViewPlayerPoints"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textColor="@android:color/white"
+                    android:text="@{Long.toString(player.points) + ` points`}"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    app:layout_constraintLeft_toRightOf="@+id/playerImage"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewPlayerAgeGender" />
+
+                <TextView
+                    android:id="@+id/textViewPlayerRank"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/rank_badge"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:text="@{Integer.toString(player.rank)}"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    app:layout_constraintBottom_toBottomOf="@+id/playerImage"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintLeft_toLeftOf="@+id/playerImage"
+                    app:layout_constraintRight_toRightOf="@+id/playerImage"
+                    app:layout_constraintTop_toBottomOf="@+id/playerImage" />
+
+                <TextView
+                    android:id="@+id/textViewPlayerDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="@{player.description}"
+                    android:textColor="@android:color/white"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewPlayerRank" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/detailsToolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_close"
+            app:title="@string/player_details" />
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/scrollView2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

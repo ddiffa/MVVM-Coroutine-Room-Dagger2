@@ -1,0 +1,3 @@
+rootProject.name='CoroutinesXRoom'
+include ':app'
+startParameter.offline = false

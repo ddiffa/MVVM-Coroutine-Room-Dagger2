@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Tennis Players</string>
+    <string name="player_details">Details</string>
+    <string name="player_age_gender">%d yrs old, (%s)</string>
+    <string name="player_points">%s points</string>
+    <string name="favorite_player">Favorite Player</string>
+    <string name="delete_player">Delete Player</string>
+
+</resources>
