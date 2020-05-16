@@ -1,4 +1,4 @@
-package com.hellodiffa.coroutinesxroom.utils
+package com.hellodiffa.coroutinesxroom.di
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

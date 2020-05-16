@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.CheckBox
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import com.hellodiffa.coroutinesxroom.R
 import com.hellodiffa.coroutinesxroom.base.BaseFragment
 import com.hellodiffa.coroutinesxroom.common.Result
 import com.hellodiffa.coroutinesxroom.data.model.Player
 import com.hellodiffa.coroutinesxroom.databinding.FragmentDetailBinding
+import com.hellodiffa.coroutinesxroom.di.injectViewModel
 import kotlinx.android.synthetic.main.fragment_detail.*
 
 /*
@@ -28,19 +30,13 @@ class DetailFragment : BaseFragment<FragmentDetailBinding, DetailViewModel>() {
 
     override fun getLayoutResourceId(): Int = R.layout.fragment_detail
 
-    companion object {
-        const val ID_PLAYER = "id_player"
-
-        fun newInstance(player: Player): DetailFragment {
-            val fragment = DetailFragment()
-            val args = Bundle().apply {
-                putString(ID_PLAYER, player.id)
-            }
-            fragment.arguments = args
-            return fragment
-        }
+    override fun injectViewModel() {
+        mViewModel = injectViewModel(viewModelFactory)
     }
 
+    companion object {
+        const val ID_PLAYER = "id_player"
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

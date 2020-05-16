@@ -5,6 +5,9 @@ import com.hellodiffa.coroutinesxroom.di.module.*
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
+import dagger.android.AndroidInjector
+import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 /*
@@ -18,12 +21,12 @@ import javax.inject.Singleton
         AppModule::class,
         NetworkModule::class,
         ViewModelModule::class,
-        AndroidInjectionModule::class,
+        AndroidSupportInjectionModule::class,
         FragmentModule::class
     ]
 )
 
-interface AppComponent {
+interface AppComponent : AndroidInjector<TennisPlayerApp> {
 
     @Component.Builder
     interface Builder {
@@ -33,6 +36,4 @@ interface AppComponent {
         fun build(): AppComponent
     }
 
-
-    fun inject(app: TennisPlayerApp)
 }

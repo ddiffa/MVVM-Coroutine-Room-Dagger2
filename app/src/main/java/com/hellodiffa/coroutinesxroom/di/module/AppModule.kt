@@ -8,6 +8,7 @@ import com.hellodiffa.coroutinesxroom.data.local.PlayerDatabase
 import com.hellodiffa.coroutinesxroom.data.local.dao.PlayerDao
 import com.hellodiffa.coroutinesxroom.data.remote.PlayerRemoteDataSource
 import com.hellodiffa.coroutinesxroom.data.remote.PlayerService
+import com.hellodiffa.coroutinesxroom.ui.detail.DetailFragment
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineDispatcher
@@ -55,6 +56,10 @@ class AppModule {
     @Named("MAIN")
     fun provideMainDispatchers(): CoroutineDispatcher =
         Dispatchers.Main
+
+    @Provides
+    @Singleton
+    fun provideDetailFragment(): DetailFragment = DetailFragment()
 
     @Provides
     @Singleton

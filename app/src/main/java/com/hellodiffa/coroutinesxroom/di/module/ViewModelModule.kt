@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.hellodiffa.coroutinesxroom.di.factory.ViewModelFactory
 import com.hellodiffa.coroutinesxroom.ui.detail.DetailViewModel
 import com.hellodiffa.coroutinesxroom.ui.main.MainViewModel
-import com.hellodiffa.coroutinesxroom.utils.ViewModelKey
+import com.hellodiffa.coroutinesxroom.di.ViewModelKey
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

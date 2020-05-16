@@ -2,7 +2,6 @@ package com.hellodiffa.coroutinesxroom.ui.main
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,13 +16,14 @@ import com.hellodiffa.coroutinesxroom.databinding.ActivityMainBinding
 import com.hellodiffa.coroutinesxroom.di.injectViewModel
 import com.hellodiffa.coroutinesxroom.ui.detail.DetailFragment
 import dagger.android.AndroidInjection
+import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
 /*
 * created by Diffa
 */
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : DaggerAppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -32,6 +32,9 @@ class MainActivity : AppCompatActivity(){
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: MainAdapter
+
+    @Inject
+    lateinit var detailFragment: DetailFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -89,8 +92,11 @@ class MainActivity : AppCompatActivity(){
     }
 
     fun onItemClicked(player: Player) {
-        val fragment = DetailFragment.newInstance(player)
-        fragment.show(supportFragmentManager, "DetailFragment")
+        val args = Bundle().apply {
+            putString(DetailFragment.ID_PLAYER, player.id)
+        }
+        detailFragment.arguments = args
+        detailFragment.show(supportFragmentManager, "DetailFragment")
     }
 
 }
