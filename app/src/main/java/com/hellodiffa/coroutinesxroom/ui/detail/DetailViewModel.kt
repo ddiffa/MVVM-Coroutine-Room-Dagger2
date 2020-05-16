@@ -8,8 +8,6 @@ import com.hellodiffa.coroutinesxroom.common.Result
 import com.hellodiffa.coroutinesxroom.data.PlayerRepository
 import com.hellodiffa.coroutinesxroom.data.model.Player
 import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -19,8 +17,8 @@ import javax.inject.Named
 
 class DetailViewModel @Inject constructor(
     private val repository: PlayerRepository,
-    @Named("IO") private val io: CoroutineDispatcher = IO,
-    @Named("MAIN") private val main: CoroutineDispatcher = Main
+    @Named("IO") private val io: CoroutineDispatcher,
+    @Named("MAIN") private val main: CoroutineDispatcher
 ) : ViewModel() {
 
     private val _player = MutableLiveData<Result<Player>>()

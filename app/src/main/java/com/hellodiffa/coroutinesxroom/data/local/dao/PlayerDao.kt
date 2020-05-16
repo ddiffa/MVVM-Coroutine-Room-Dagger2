@@ -1,8 +1,8 @@
 package com.hellodiffa.coroutinesxroom.data.local.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.hellodiffa.coroutinesxroom.data.model.Player
-import kotlinx.coroutines.flow.Flow
 
 /*
 * created by Diffa
@@ -18,7 +18,7 @@ interface PlayerDao {
     suspend fun saveAll(players: List<Player>)
 
     @Query("SELECT * FROM players ORDER BY firstName")
-    fun loadAllPlayersFlow(): Flow<List<Player>>
+    fun loadAllPlayers(): LiveData<List<Player>>
 
     @Update
     suspend fun updatePlayer(player: Player)

@@ -8,7 +8,9 @@ class MainViewModel @Inject constructor(
     private val repository: PlayerRepository
 ) : ViewModel() {
 
+
     val player by lazy {
         repository.observePlayer()
     }
+
 }

@@ -2,50 +2,40 @@ package com.hellodiffa.coroutinesxroom.ui.main
 
 import android.os.Bundle
 import android.view.View
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.hellodiffa.coroutinesxroom.R
+import com.hellodiffa.coroutinesxroom.base.BaseActivity
 import com.hellodiffa.coroutinesxroom.common.Result
 import com.hellodiffa.coroutinesxroom.data.model.Player
 import com.hellodiffa.coroutinesxroom.databinding.ActivityMainBinding
 import com.hellodiffa.coroutinesxroom.di.injectViewModel
 import com.hellodiffa.coroutinesxroom.ui.detail.DetailFragment
-import dagger.android.AndroidInjection
-import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
 /*
 * created by Diffa
 */
 
-class MainActivity : DaggerAppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    private lateinit var viewModel: MainViewModel
-
-    private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: MainAdapter
 
     @Inject
     lateinit var detailFragment: DetailFragment
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
-        setTheme(R.style.AppTheme)
+    override fun injectViewModel() {
+        mViewModel = injectViewModel(viewModelFactory)
+    }
 
-        super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+    override fun getViewModelClass(): Class<MainViewModel> = MainViewModel::class.java
 
-        adapter = MainAdapter()
-        adapter.setActivity(this)
-        viewModel = injectViewModel(viewModelFactory)
+    override fun getLayoutResourceId(): Int = R.layout.activity_main
+    override fun initView() {
+        adapter = MainAdapter(this::onItemClicked)
 
         binding.recyclerView.layoutManager =
             LinearLayoutManager(
@@ -56,7 +46,6 @@ class MainActivity : DaggerAppCompatActivity() {
         binding.recyclerView.addItemDecoration(DividerItemDecoration(this, RecyclerView.VERTICAL))
 
         binding.adapter = adapter
-
         observeUi()
     }
 
@@ -91,12 +80,13 @@ class MainActivity : DaggerAppCompatActivity() {
         })
     }
 
-    fun onItemClicked(player: Player) {
+    private fun onItemClicked(player: Player) {
         val args = Bundle().apply {
             putString(DetailFragment.ID_PLAYER, player.id)
         }
         detailFragment.arguments = args
         detailFragment.show(supportFragmentManager, "DetailFragment")
     }
+
 
 }

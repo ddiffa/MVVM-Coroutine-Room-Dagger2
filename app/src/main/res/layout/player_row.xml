@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
 
         <variable
@@ -14,22 +13,14 @@
         <variable
             name="image"
             type="String" />
-
-        <variable
-            name="name"
-            type="String" />
-
-        <variable
-            name="handler"
-            type="com.hellodiffa.coroutinesxroom.ui.main.MainActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?selectableItemBackground"
-        android:padding="16dp"
-        android:onClick="@{() -> handler.onItemClicked(player)}">
+        android:padding="16dp">
 
         <ImageView
             android:id="@+id/imageViewPlayer"
@@ -63,8 +54,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:textColor="@android:color/white"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintLeft_toRightOf="@+id/imageViewPlayer"
@@ -75,14 +66,14 @@
             android:id="@+id/textViewPlayerName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:textColor="@android:color/white"
-            android:layout_marginStart="16dp"
             app:layout_constraintBottom_toTopOf="@+id/textViewPlayerCountry"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintLeft_toRightOf="@+id/imageViewPlayer"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@{name}" />
+            tools:text="@{player.firstName + ` ` + player.lastName}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
